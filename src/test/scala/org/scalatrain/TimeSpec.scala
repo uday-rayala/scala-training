@@ -50,7 +50,19 @@ class TimeSpec extends Specification { def is =
   p^
   "Calling Time.toXml and then Time.fromXml" ^
     `should return an equal Time instance wrapped in Some` ^
-  end
+  p^
+  "Calling Time.isIncreasing" ^
+    `should return true if time is increasing` ^
+    `should return false if time is not increasing` ^
+  end                 
+  
+  def `should return true if time is increasing` =
+    (Time.isIncreasing(Seq(Time(1), Time(1,1))) must beTrue) and
+    (Time.isIncreasing(Seq(Time(1), Time(1,1), Time(1, 2))) must beTrue)
+    
+  def `should return false if time is not increasing` = 
+    (Time.isIncreasing(Seq(Time(1, 1), Time(1))) must beFalse) and
+    (Time.isIncreasing(Seq(Time(1, 2), Time(1, 3), Time(1))) must beFalse)
 
   def `with invalid hours should throw an IAE` =
     (Time(-1) must throwA[IAE]) and (Time(24) must throwA[IAE])
@@ -91,4 +103,6 @@ class TimeSpec extends Specification { def is =
 
   def `should return an equal Time instance wrapped in Some` =
     Time fromXml Time(12, 1).toXml must_== Some(Time(12, 1)) 
+    
+  
 }
