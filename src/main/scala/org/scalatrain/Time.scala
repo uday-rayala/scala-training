@@ -4,24 +4,7 @@ import scala.util.control.Exception
 import scala.xml.Elem
 import scala.xml.Node
 
-object Time {
-
-  def isIncreasing(times: Seq[Time]):Boolean = {
-    times.tail.foldLeft((true, times.head)) { (acc, time) => (acc._1 && acc._2 < time, time) }._1
-  }
-
-  
-  // def isIncreasing(times: Seq[Time]):Boolean = {
-  //   times sliding 2 forall { case Seq(first, second) => first < second }
-  // }
-  
-  // def isIncreasing(times: Seq[Time]):Boolean = {
-  //   times match {
-  //     case t1 :: t2 :: rest => t1 < t2 && isIncreasing(t2 :: rest)
-  //     case _ => true
-  //   }
-  // }
-  
+object Time {  
 
   def fromMinutes(minutes: Int): Time = new Time(minutes / 60, minutes % 60)
 
