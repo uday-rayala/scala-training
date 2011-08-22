@@ -1,0 +1,19 @@
+# IntelliJ
+*.iws
+.classpath
+.project
+.target
+.scala_dependencies
+
+# sbt
+target/
+artifacts/
+project/boot/
+lib_managed/
+
+# other stuff
+*.pyc
+.*.swp
+
+# mac
+.DS_Store
