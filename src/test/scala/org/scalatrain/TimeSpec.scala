@@ -61,7 +61,9 @@ class TimeSpec extends Specification { def is =
     (Time.isIncreasing(Seq(Time(1), Time(1,1), Time(1, 2))) must beTrue)
     
   def `should return false if time is not increasing` = 
-    (Time.isIncreasing(Seq(Time(1, 1), Time(1))) must beFalse) and
+    (Time.isIncreasing(Seq(Time(1, 1), Time(1))) must beFalse) and        
+    (Time.isIncreasing(Seq(Time(1, 3), Time(1, 2))) must beFalse) and
+    (Time.isIncreasing(Seq(Time(1, 3), Time(1, 2), Time(1,5))) must beFalse) and    
     (Time.isIncreasing(Seq(Time(1, 2), Time(1, 3), Time(1))) must beFalse)
 
   def `with invalid hours should throw an IAE` =
