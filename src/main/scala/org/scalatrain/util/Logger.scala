@@ -10,5 +10,5 @@ case class Logger(logger: Slf4jLogger) {
 }
 
 trait Logging {
-  lazy val logger = new Logger(LoggerFactory.getLogger(getClass()))
+  protected lazy val logger = new Logger(LoggerFactory.getLogger(getClass()))
 }

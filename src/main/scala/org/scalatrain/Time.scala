@@ -1,15 +1,13 @@
 package org.scalatrain
 
 import scala.util.control.Exception
-import scala.xml.{ Elem, Node }
+import scala.xml.Elem
+import scala.xml.Node
 
 object Time {
   
   def isIncreasing(times: Seq[Time]):Boolean = {
-    times match {
-      case t1 :: t2 :: rest => t1 < t2 && isIncreasing(t2 :: rest)
-      case _ => true
-    }
+    times sliding 2 forall { case Seq(first, second) => first < second }
   }
 
   def fromMinutes(minutes: Int): Time = new Time(minutes / 60, minutes % 60)
