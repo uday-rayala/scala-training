@@ -7,7 +7,7 @@ import scala.xml.Node
 object Time {
 
   def isIncreasing(times: Seq[Time]):Boolean = {
-    times.tail.foldLeft((true, times.head)) { (a, t) => (a._1 && a._2 < t, t) }._1
+    times.tail.foldLeft((true, times.head)) { (acc, time) => (acc._1 && acc._2 < time, time) }._1
   }
 
   
