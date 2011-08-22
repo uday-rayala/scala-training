@@ -46,7 +46,27 @@ class JourneyPlannerSpec extends Specification { def is =
     `should be false for not existing connections` ^
     `should be false for too long connections` ^
     `should be true for short trips` ^
+  p^
+  "Calling JourneyPlanner.hops" ^
+    `should initialise hops grouped by departure station` ^
   end
+  
+  def `should initialise hops grouped by departure station` = {
+    planner.hops must_== Map(
+      munich -> Set(
+        Hop(munich, nuremberg, ice722),
+        Hop(munich, nuremberg, ice724)
+      ), 
+      nuremberg -> Set(
+        Hop(nuremberg, frankfurt, ice722),
+        Hop(nuremberg, frankfurt, ice724)
+      ),
+      frankfurt -> Set(
+        Hop(frankfurt, essen, ice722),
+        Hop(frankfurt, cologne, ice724)      
+      )
+    )
+  }
 
   def `with null trains should throw an IAE` =
     new JourneyPlanner(null) must throwA[IAE]

@@ -7,10 +7,17 @@ case class Train(info: TrainInfo, schedule: Seq[(Time, Station)]) {
   // TODO schedule must be monotonically increaing in time!
 
   val stations: Seq[Station] = schedule map { _._2 }
+  val backToBackStations: Seq[(Station, Station)] = stations.init zip stations.tail
+  val departureTimes: Map[Station, Time] = schedule map { _.swap } toMap
 }
 
 case class Station(name: String) {
   require(name != null, "name must not be null!")
+}
+
+case class Hop(from: Station, to: Station, train: Train) {
+  val departureTime = train.departureTimes(from)
+  val arrivalTime = train.departureTimes(to)  
 }
 
 sealed abstract class TrainInfo {

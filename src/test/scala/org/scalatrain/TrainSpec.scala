@@ -32,7 +32,15 @@ class TrainSpec extends Specification { def is =
     `with an schedule of only 0 or 1 elements should throw an IAE` ^
   p^
   `The value Train.stations should be initialized correctly` ^
+  `The value Train.backToBackStations should be initialized correctly` ^  
+  `The value Train.departureTimes should be initialized correctly` ^    
   end
+  
+  def `The value Train.backToBackStations should be initialized correctly` = 
+    ice722.backToBackStations must_== Seq(munich -> frankfurt, frankfurt -> essen)
+    
+  def `The value Train.departureTimes should be initialized correctly` =
+    ice722.departureTimes must_== Map(munich -> munichTime, frankfurt -> frankfurtTime, essen -> essenTime)
 
   def `with a null info should throw an IAE` =
     Train(null, Seq.empty) must throwA[IAE]
@@ -63,4 +71,26 @@ class StationSpec extends Specification { def is =
 
   def `with a null name should throw an IAE` =
     Station(null) must throwA[IAE]
+}
+ 
+
+@RunWith(classOf[JUnitRunner])
+class HopSpec extends Specification { def is =
+
+  "Creating a Hop" ^
+    `should initialise departure and arrival times` ^
+  end
+
+  def `should initialise departure and arrival times` = {
+    val hop = Hop(munich, essen, ice722)
+    hop.departureTime must_== munichTime
+    hop.arrivalTime must_== essenTime
+  }
+  
+  private val (munich, frankfurt, essen) = (Station("Munich"), Station("Frankfurt"), Station("Essen"))
+
+  private val (munichTime, frankfurtTime, essenTime) = (Time(9, 55), Time(13, 25), Time(15, 02))
+
+  private val ice722 = Train(Ice("722"), Seq(munichTime -> munich, frankfurtTime -> frankfurt, essenTime -> essen))
+  
 }
