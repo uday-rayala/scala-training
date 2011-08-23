@@ -13,6 +13,10 @@ case class Train(info: TrainInfo, schedule: Seq[(Time, Station)]) {
 
 case class Station(name: String) {
   require(name != null, "name must not be null!")
+} 
+
+object Station {
+  implicit def fromStringToStation(stationName: String): Station = Station(stationName)
 }
 
 case class Hop(from: Station, to: Station, train: Train) {

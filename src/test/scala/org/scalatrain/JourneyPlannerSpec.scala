@@ -22,7 +22,6 @@ import java.lang.{ IllegalArgumentException => IAE }
 import org.junit.runner.RunWith
 import org.specs2._
 import org.specs2.runner.JUnitRunner
-import org.scalatrain.JourneyPlanner._
 
 @RunWith(classOf[JUnitRunner])
 class JourneyPlannerSpec extends Specification { def is =

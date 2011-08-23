@@ -41,7 +41,3 @@ class JourneyPlanner(trains: Set[Train]) extends Logging {
     }
   }
 }
-
-object JourneyPlanner {
-  implicit def fromStringToStation(stationName: String): Station = Station(stationName)
-}
