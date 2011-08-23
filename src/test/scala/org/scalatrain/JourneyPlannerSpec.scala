@@ -22,6 +22,7 @@ import java.lang.{ IllegalArgumentException => IAE }
 import org.junit.runner.RunWith
 import org.specs2._
 import org.specs2.runner.JUnitRunner
+import org.scalatrain.JourneyPlanner._
 
 @RunWith(classOf[JUnitRunner])
 class JourneyPlannerSpec extends Specification { def is =
@@ -78,8 +79,8 @@ class JourneyPlannerSpec extends Specification { def is =
     planner stopsAt null must throwA[IAE]
 
   def `should return the correct trains` =
-    (planner trainsAt munich must_== Set(ice722, ice724)) and (planner trainsAt essen must_== Set(ice722)) and
-        (planner trainsAt Station("unknown") must_== Set())
+    (planner trainsAt "Munich" must_== Set(ice722, ice724)) and (planner trainsAt essen must_== Set(ice722)) and
+        (planner trainsAt "unknown" must_== Set())
 
   def `with null should throw an IAE (stopsAt)` =
     planner stopsAt null must throwA[IAE]
